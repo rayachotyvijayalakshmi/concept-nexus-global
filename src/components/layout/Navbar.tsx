@@ -75,7 +75,7 @@ export function Navbar() {
                   Share Idea
                 </Link>
                 <Link
-                  to="/collaborators"
+                  to="/collaborations"
                   className="text-muted-foreground hover:text-foreground transition-colors font-medium"
                 >
                   Find Collaborators
@@ -222,7 +222,7 @@ export function Navbar() {
                   Share Idea
                 </Link>
                 <Link
-                  to="/collaborators"
+                  to="/collaborations"
                   className="block py-2 text-foreground font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
