@@ -42,10 +42,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "blocked_users_blocked_id_fkey"
+            columns: ["blocked_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "blocked_users_blocker_id_fkey"
             columns: ["blocker_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocked_users_blocker_id_fkey"
+            columns: ["blocker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -97,10 +111,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "collaboration_requests_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "collaboration_requests_requester_id_fkey"
             columns: ["requester_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collaboration_requests_requester_id_fkey"
+            columns: ["requester_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -152,10 +180,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "conversations_participant_one_fkey"
+            columns: ["participant_one"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "conversations_participant_two_fkey"
             columns: ["participant_two"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_participant_two_fkey"
+            columns: ["participant_two"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -192,6 +234,13 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "idea_upvotes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -250,6 +299,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "ideas_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       messages: {
@@ -296,6 +352,13 @@ export type Database = {
             columns: ["sender_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
             referencedColumns: ["id"]
           },
         ]
@@ -428,17 +491,114 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "reports_reported_user_id_fkey"
+            columns: ["reported_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "reports_reporter_id_fkey"
             columns: ["reporter_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "reports_reporter_id_fkey"
+            columns: ["reporter_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
     Views: {
-      [_ in never]: never
+      profiles_public: {
+        Row: {
+          about: string | null
+          avatar_url: string | null
+          behance_url: string | null
+          created_at: string | null
+          email: string | null
+          experience_years: number | null
+          full_name: string | null
+          github_url: string | null
+          guidance_domains: string[] | null
+          headline: string | null
+          id: string | null
+          investment_interests: string[] | null
+          investment_stage:
+            | Database["public"]["Enums"]["investment_stage"]
+            | null
+          linkedin_url: string | null
+          location: string | null
+          open_to_pitches: boolean | null
+          portfolio_url: string | null
+          role: Database["public"]["Enums"]["user_role"] | null
+          skills: string[] | null
+          ticket_size_max: number | null
+          ticket_size_min: number | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          about?: string | null
+          avatar_url?: string | null
+          behance_url?: string | null
+          created_at?: string | null
+          email?: never
+          experience_years?: number | null
+          full_name?: string | null
+          github_url?: string | null
+          guidance_domains?: string[] | null
+          headline?: string | null
+          id?: string | null
+          investment_interests?: string[] | null
+          investment_stage?:
+            | Database["public"]["Enums"]["investment_stage"]
+            | null
+          linkedin_url?: string | null
+          location?: string | null
+          open_to_pitches?: boolean | null
+          portfolio_url?: string | null
+          role?: Database["public"]["Enums"]["user_role"] | null
+          skills?: string[] | null
+          ticket_size_max?: number | null
+          ticket_size_min?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          about?: string | null
+          avatar_url?: string | null
+          behance_url?: string | null
+          created_at?: string | null
+          email?: never
+          experience_years?: number | null
+          full_name?: string | null
+          github_url?: string | null
+          guidance_domains?: string[] | null
+          headline?: string | null
+          id?: string | null
+          investment_interests?: string[] | null
+          investment_stage?:
+            | Database["public"]["Enums"]["investment_stage"]
+            | null
+          linkedin_url?: string | null
+          location?: string | null
+          open_to_pitches?: boolean | null
+          portfolio_url?: string | null
+          role?: Database["public"]["Enums"]["user_role"] | null
+          skills?: string[] | null
+          ticket_size_max?: number | null
+          ticket_size_min?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       get_current_profile_id: { Args: never; Returns: string }
