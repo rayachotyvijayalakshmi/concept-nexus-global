@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Lightbulb, Linkedin, Twitter, Github } from 'lucide-react';
+import { Lightbulb } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -29,7 +29,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/collaborators" className="hover:text-background transition-colors">
+                <Link to="/collaborations" className="hover:text-background transition-colors">
                   Find Collaborators
                 </Link>
               </li>
@@ -38,37 +38,32 @@ export function Footer() {
                   Share Your Idea
                 </Link>
               </li>
+              <li>
+                <Link to="/messages" className="hover:text-background transition-colors">
+                  Messages
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* For */}
+          {/* Company */}
           <div>
-            <h4 className="font-display font-semibold mb-4">For</h4>
+            <h4 className="font-display font-semibold mb-4">Company</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
-                  Idea Owners
-                </span>
+                <Link to="/about" className="hover:text-background transition-colors">
+                  About Us
+                </Link>
               </li>
               <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
-                  Developers
-                </span>
+                <Link to="/contact" className="hover:text-background transition-colors">
+                  Contact Us
+                </Link>
               </li>
               <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
-                  Designers
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
-                  Mentors
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
-                  Investors
-                </span>
+                <Link to="/faqs" className="hover:text-background transition-colors">
+                  FAQs
+                </Link>
               </li>
             </ul>
           </div>
@@ -78,19 +73,14 @@ export function Footer() {
             <h4 className="font-display font-semibold mb-4">Legal</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
+                <Link to="/privacy" className="hover:text-background transition-colors">
                   Privacy Policy
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
+                <Link to="/terms" className="hover:text-background transition-colors">
                   Terms of Service
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-background transition-colors cursor-pointer">
-                  Cookie Policy
-                </span>
+                </Link>
               </li>
             </ul>
           </div>

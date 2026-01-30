@@ -11,12 +11,12 @@ import {
   TrendingUp,
   Shield,
   ArrowRight,
-  CheckCircle2,
   Sparkles,
   Target,
   Handshake,
   Rocket,
 } from 'lucide-react';
+import heroIllustration from '@/assets/hero-illustration.png';
 
 const features = [
   {
@@ -50,31 +50,31 @@ const roles = [
     role: 'Idea Owners',
     description: 'Share your vision and find the perfect team to bring it to life.',
     icon: Target,
-    color: 'role-idea-owner',
+    color: 'bg-role-idea-owner',
   },
   {
     role: 'Developers',
     description: 'Discover exciting projects and turn innovative ideas into reality.',
     icon: Code2,
-    color: 'role-developer',
+    color: 'bg-role-developer',
   },
   {
     role: 'Designers',
     description: 'Shape the future of products with your creative expertise.',
     icon: Palette,
-    color: 'role-designer',
+    color: 'bg-role-designer',
   },
   {
     role: 'Mentors',
     description: 'Guide entrepreneurs and share your valuable experience.',
     icon: Users,
-    color: 'role-mentor',
+    color: 'bg-role-mentor',
   },
   {
     role: 'Investors',
     description: 'Discover promising ventures at their earliest stages.',
     icon: TrendingUp,
-    color: 'role-investor',
+    color: 'bg-role-investor',
   },
 ];
 
@@ -104,7 +104,7 @@ export default function Landing() {
         </div>
 
         <div className="container relative mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -115,19 +115,19 @@ export default function Landing() {
                 The platform for idea collaboration
               </span>
 
-              <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                 Where Ideas Meet{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400">
                   The Right People
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-white/80 mb-10 max-w-xl leading-relaxed">
                 Connect with developers, designers, mentors, and investors. 
                 Build trusted relationships and transform your vision into reality.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start gap-4">
                 <Button
                   size="lg"
                   className="bg-white text-foreground hover:bg-white/90 shadow-xl px-8 h-14 text-base font-semibold"
@@ -145,23 +145,31 @@ export default function Landing() {
                   Share Your Idea
                 </Button>
               </div>
+
+              {/* Stats */}
+              <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-left">
+                    <div className="text-2xl md:text-3xl font-display font-bold text-white mb-1">
+                      {stat.value}
+                    </div>
+                    <div className="text-white/60 text-sm">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:block"
             >
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl md:text-4xl font-display font-bold text-white mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-white/60 text-sm">{stat.label}</div>
-                </div>
-              ))}
+              <img
+                src={heroIllustration}
+                alt="IdeaForge - Connect ideas with the right people"
+                className="w-full rounded-2xl shadow-2xl"
+              />
             </motion.div>
           </div>
         </div>
