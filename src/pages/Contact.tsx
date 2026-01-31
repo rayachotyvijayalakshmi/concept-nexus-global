@@ -202,48 +202,28 @@ export default function Contact() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <Mail className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                    <Mail className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">
                       Email Support
                     </h3>
                     <p className="text-muted-foreground text-sm mb-2">
-                      For general inquiries and support
+                      For all inquiries and support
                     </p>
                     <a
-                      href="mailto:support@ideaforge.com"
-                      className="text-primary hover:underline"
+                      href="mailto:rayachotyvijayalakshmi@gmail.com"
+                      className="text-accent hover:underline font-medium"
                     >
-                      support@ideaforge.com
+                      rayachotyvijayalakshmi@gmail.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">
-                      Partnership Inquiries
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-2">
-                      For business and partnership opportunities
-                    </p>
-                    <a
-                      href="mailto:partnerships@ideaforge.com"
-                      className="text-primary hover:underline"
-                    >
-                      partnerships@ideaforge.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <Clock className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                    <Clock className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">
@@ -257,8 +237,8 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <MapPin className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                    <MapPin className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">

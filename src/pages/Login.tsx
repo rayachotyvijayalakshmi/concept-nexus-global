@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Lightbulb, Loader2, ArrowLeft } from 'lucide-react';
+import { Loader2, ArrowLeft, Flame } from 'lucide-react';
 import { toast } from 'sonner';
 import authIllustration from '@/assets/auth-illustration.png';
 
@@ -68,12 +68,13 @@ export default function Login() {
 
           <div className="bg-card rounded-2xl border border-border shadow-card p-8">
             {/* Logo */}
-            <div className="flex items-center gap-2 mb-8">
-              <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shadow-glow">
-                <Lightbulb className="w-5 h-5 text-primary-foreground" />
+            <div className="flex items-center gap-2.5 mb-8">
+              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shadow-md">
+                <Flame className="w-5 h-5 text-accent-foreground" />
               </div>
-              <span className="font-display font-bold text-xl text-foreground">
-                IdeaForge
+              <span className="font-display font-bold text-xl">
+                <span className="text-foreground">Idea</span>
+                <span className="text-accent">Forge</span>
               </span>
             </div>
 
@@ -153,7 +154,7 @@ export default function Login() {
 
               <Button
                 type="submit"
-                className="w-full h-12 gradient-primary shadow-glow font-semibold"
+                className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold"
                 disabled={loading}
               >
                 {loading ? (
@@ -171,7 +172,7 @@ export default function Login() {
               Don't have an account?{' '}
               <Link
                 to="/signup"
-                className="text-primary hover:underline font-medium"
+                className="text-accent hover:underline font-medium"
               >
                 Sign up
               </Link>
@@ -193,11 +194,11 @@ export default function Login() {
             alt="Login illustration"
             className="w-full rounded-2xl shadow-2xl"
           />
-          <div className="mt-8 text-center text-white">
+          <div className="mt-8 text-center text-primary-foreground">
             <h2 className="font-display text-2xl font-bold mb-2">
               Join the Innovation Network
             </h2>
-            <p className="text-white/70">
+            <p className="text-primary-foreground/70">
               Connect with founders, developers, designers, and investors worldwide.
             </p>
           </div>

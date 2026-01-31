@@ -40,7 +40,8 @@ export default function Ideas() {
       .select(`
         *,
         owner:profiles!ideas_owner_id_fkey(*)
-      `);
+      `)
+      .eq('visibility', 'public'); // Only fetch public ideas
 
     if (category !== 'all') {
       query = query.eq('category', category as IdeaCategory);
@@ -90,7 +91,7 @@ export default function Ideas() {
             </div>
             {user && (
               <Button
-                className="gradient-primary shadow-glow font-semibold"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold"
                 onClick={() => navigate('/ideas/new')}
               >
                 <PlusCircle className="w-4 h-4 mr-2" />
@@ -184,7 +185,7 @@ export default function Ideas() {
               </p>
               {user && (
                 <Button
-                  className="gradient-primary shadow-glow"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow"
                   onClick={() => navigate('/ideas/new')}
                 >
                   <PlusCircle className="w-4 h-4 mr-2" />

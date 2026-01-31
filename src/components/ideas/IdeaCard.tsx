@@ -30,16 +30,16 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
       transition={{ delay: index * 0.05, duration: 0.4 }}
     >
       <Link to={`/ideas/${idea.id}`}>
-        <div className="group relative bg-card rounded-xl border border-border p-6 shadow-card hover:shadow-lg transition-all duration-300 hover:border-primary/30 hover:-translate-y-1">
-          {/* Visibility indicator */}
-          <div className="absolute top-4 right-4">
+        <div className="group relative bg-card rounded-xl border border-border p-6 shadow-card hover:shadow-lg transition-all duration-300 hover:border-accent/30 hover:-translate-y-1">
+          {/* Visibility indicator - non-clickable */}
+          <div className="absolute top-4 right-4 pointer-events-none">
             {idea.visibility === 'public' ? (
-              <div className="flex items-center gap-1 text-success text-xs font-medium">
+              <div className="flex items-center gap-1 text-success text-xs font-medium bg-success/10 px-2 py-1 rounded-full">
                 <Eye className="w-3.5 h-3.5" />
                 Public
               </div>
             ) : (
-              <div className="flex items-center gap-1 text-muted-foreground text-xs font-medium">
+              <div className="flex items-center gap-1 text-muted-foreground text-xs font-medium bg-muted px-2 py-1 rounded-full">
                 <EyeOff className="w-3.5 h-3.5" />
                 Preview
               </div>
@@ -50,7 +50,7 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
           <CategoryBadge category={idea.category} size="sm" className="mb-3" />
 
           {/* Title */}
-          <h3 className="font-display font-semibold text-lg text-foreground mb-2 pr-16 group-hover:text-primary transition-colors line-clamp-2">
+          <h3 className="font-display font-semibold text-lg text-foreground mb-2 pr-20 group-hover:text-accent transition-colors line-clamp-2">
             {idea.title}
           </h3>
 

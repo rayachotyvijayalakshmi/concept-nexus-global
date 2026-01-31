@@ -15,6 +15,7 @@ import {
   Target,
   Handshake,
   Rocket,
+  Flame,
 } from 'lucide-react';
 import heroIllustration from '@/assets/hero-illustration.png';
 
@@ -110,19 +111,19 @@ export default function Landing() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/90 text-sm font-medium mb-8 backdrop-blur-sm border border-white/10">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 text-primary-foreground/90 text-sm font-medium mb-8 backdrop-blur-sm border border-primary-foreground/10">
                 <Sparkles className="w-4 h-4" />
                 The platform for idea collaboration
               </span>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
                 Where Ideas Meet{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400">
+                <span className="text-accent">
                   The Right People
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl text-white/80 mb-10 max-w-xl leading-relaxed">
+              <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl leading-relaxed">
                 Connect with developers, designers, mentors, and investors. 
                 Build trusted relationships and transform your vision into reality.
               </p>
@@ -130,7 +131,7 @@ export default function Landing() {
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 <Button
                   size="lg"
-                  className="bg-white text-foreground hover:bg-white/90 shadow-xl px-8 h-14 text-base font-semibold"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl px-8 h-14 text-base font-semibold"
                   onClick={() => navigate('/ideas')}
                 >
                   Browse Ideas
@@ -139,7 +140,7 @@ export default function Landing() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 h-14 text-base font-semibold"
+                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm px-8 h-14 text-base font-semibold"
                   onClick={() => navigate('/signup')}
                 >
                   Share Your Idea
@@ -150,10 +151,10 @@ export default function Landing() {
               <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-left">
-                    <div className="text-2xl md:text-3xl font-display font-bold text-white mb-1">
+                    <div className="text-2xl md:text-3xl font-display font-bold text-accent mb-1">
                       {stat.value}
                     </div>
-                    <div className="text-white/60 text-sm">{stat.label}</div>
+                    <div className="text-primary-foreground/60 text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -201,10 +202,10 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                className="group p-6 rounded-2xl bg-card border border-border hover:border-accent/30 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-5 shadow-glow group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-6 h-6 text-primary-foreground" />
+                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+                  <feature.icon className="w-6 h-6 text-accent-foreground" />
                 </div>
                 <h3 className="font-display font-semibold text-lg text-foreground mb-2">
                   {feature.title}
@@ -245,7 +246,7 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 text-center"
+                className="group p-6 rounded-2xl bg-card border border-border hover:border-accent/30 hover:shadow-lg transition-all duration-300 text-center"
               >
                 <div className={`w-14 h-14 rounded-2xl ${item.color} flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform`}>
                   <item.icon className="w-7 h-7 text-white" />
@@ -273,21 +274,21 @@ export default function Landing() {
             className="relative overflow-hidden rounded-3xl gradient-hero p-12 md:p-20 text-center"
           >
             {/* Decorative */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-foreground/5 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
 
             <div className="relative">
-              <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-primary-foreground mb-6">
                 Ready to Forge Your Next Big Idea?
               </h2>
-              <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+              <p className="text-primary-foreground/80 text-lg mb-10 max-w-xl mx-auto">
                 Join a global community of innovators, builders, and investors. 
                 Your next breakthrough starts here.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button
                   size="lg"
-                  className="bg-white text-foreground hover:bg-white/90 shadow-xl px-8 h-14 text-base font-semibold"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl px-8 h-14 text-base font-semibold"
                   onClick={() => navigate('/signup')}
                 >
                   Get Started Free
@@ -296,7 +297,7 @@ export default function Landing() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 px-8 h-14 text-base font-semibold"
+                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 h-14 text-base font-semibold"
                   onClick={() => navigate('/ideas')}
                 >
                   Explore Ideas
