@@ -8,7 +8,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import {
-  Lightbulb,
   Loader2,
   ArrowLeft,
   Target,
@@ -16,6 +15,7 @@ import {
   Palette,
   Users,
   TrendingUp,
+  Flame,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { UserRole } from '@/lib/types';
@@ -88,11 +88,11 @@ export default function Signup() {
             alt="Signup illustration"
             className="w-full rounded-2xl shadow-2xl"
           />
-          <div className="mt-8 text-center text-white">
+          <div className="mt-8 text-center text-primary-foreground">
             <h2 className="font-display text-2xl font-bold mb-2">
               Start Your Innovation Journey
             </h2>
-            <p className="text-white/70">
+            <p className="text-primary-foreground/70">
               Share ideas, find collaborators, and build the future together.
             </p>
           </div>
@@ -118,12 +118,13 @@ export default function Signup() {
 
           <div className="bg-card rounded-2xl border border-border shadow-card p-8">
             {/* Logo */}
-            <div className="flex items-center gap-2 mb-8">
-              <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shadow-glow">
-                <Lightbulb className="w-5 h-5 text-primary-foreground" />
+            <div className="flex items-center gap-2.5 mb-8">
+              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shadow-md">
+                <Flame className="w-5 h-5 text-accent-foreground" />
               </div>
-              <span className="font-display font-bold text-xl text-foreground">
-                IdeaForge
+              <span className="font-display font-bold text-xl">
+                <span className="text-foreground">Idea</span>
+                <span className="text-accent">Forge</span>
               </span>
             </div>
 
@@ -230,14 +231,14 @@ export default function Signup() {
                         onClick={() => setRole(option.value as UserRole)}
                         className={`flex items-center gap-3 p-3 rounded-lg border transition-all text-left ${
                           role === option.value
-                            ? 'border-primary bg-primary/5 ring-1 ring-primary'
-                            : 'border-border hover:border-primary/50'
+                            ? 'border-accent bg-accent/5 ring-1 ring-accent'
+                            : 'border-border hover:border-accent/50'
                         }`}
                       >
                         <div
                           className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                             role === option.value
-                              ? 'bg-primary text-primary-foreground'
+                              ? 'bg-accent text-accent-foreground'
                               : 'bg-muted text-muted-foreground'
                           }`}
                         >
@@ -259,7 +260,7 @@ export default function Signup() {
 
               <Button
                 type="submit"
-                className="w-full h-12 gradient-primary shadow-glow font-semibold"
+                className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold"
                 disabled={loading}
               >
                 {loading ? (
@@ -277,7 +278,7 @@ export default function Signup() {
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="text-primary hover:underline font-medium"
+                className="text-accent hover:underline font-medium"
               >
                 Sign in
               </Link>

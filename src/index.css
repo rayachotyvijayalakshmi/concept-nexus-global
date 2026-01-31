@@ -5,129 +5,132 @@
 @tailwind utilities;
 
 /* IdeaForge Design System - Professional Startup Platform */
+/* Deep Navy + Charcoal + Amber Accent Color System */
 
 @layer base {
   :root {
-    /* Core brand colors - Deep indigo for trust, amber for energy */
-    --background: 220 20% 97%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-
-    /* Primary - Deep indigo */
-    --primary: 239 84% 67%;
+    /* Primary - Deep Navy Blue */
+    --primary: 210 50% 15%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Soft slate */
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 222 47% 11%;
+    /* Background - Light neutral gray (not pure white) */
+    --background: 220 15% 96%;
+    --foreground: 210 30% 15%;
 
-    /* Muted */
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    /* Card - White on light background */
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 15%;
 
-    /* Accent - Warm amber */
-    --accent: 38 92% 50%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 15%;
+
+    /* Secondary - Charcoal / Dark gray */
+    --secondary: 210 15% 25%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted - Soft gray */
+    --muted: 220 15% 92%;
+    --muted-foreground: 210 15% 45%;
+
+    /* Accent - Amber/Orange for actions */
+    --accent: 32 95% 50%;
     --accent-foreground: 0 0% 100%;
 
     /* Success - Emerald */
     --success: 160 84% 39%;
     --success-foreground: 0 0% 100%;
 
-    /* Destructive */
+    /* Destructive - Red */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 239 84% 67%;
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 32 95% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.625rem;
 
     /* Role colors */
     --role-developer: 199 89% 48%;
     --role-designer: 292 84% 61%;
     --role-mentor: 160 84% 39%;
-    --role-investor: 38 92% 50%;
-    --role-idea-owner: 239 84% 67%;
+    --role-investor: 32 95% 50%;
+    --role-idea-owner: 210 50% 15%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(239 84% 67%) 0%, hsl(262 83% 58%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(25 95% 53%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(239 84% 30%) 50%, hsl(262 83% 35%) 100%);
-    --gradient-subtle: linear-gradient(135deg, hsl(220 20% 97%) 0%, hsl(220 14% 96%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(210 50% 15%) 0%, hsl(210 50% 25%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(32 95% 50%) 0%, hsl(25 95% 53%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(210 50% 10%) 0%, hsl(210 50% 18%) 50%, hsl(210 45% 22%) 100%);
+    --gradient-subtle: linear-gradient(135deg, hsl(220 15% 96%) 0%, hsl(220 15% 94%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 15% 99%) 100%);
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(222 47% 11% / 0.1), 0 8px 10px -6px hsl(222 47% 11% / 0.1);
-    --shadow-glow: 0 0 40px -10px hsl(239 84% 67% / 0.3);
-    --shadow-card: 0 2px 8px -2px hsl(222 47% 11% / 0.08), 0 4px 16px -4px hsl(222 47% 11% / 0.08);
+    --shadow-sm: 0 1px 2px 0 hsl(210 30% 15% / 0.04);
+    --shadow-md: 0 4px 6px -1px hsl(210 30% 15% / 0.08), 0 2px 4px -2px hsl(210 30% 15% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(210 30% 15% / 0.08), 0 4px 6px -4px hsl(210 30% 15% / 0.06);
+    --shadow-xl: 0 20px 25px -5px hsl(210 30% 15% / 0.1), 0 8px 10px -6px hsl(210 30% 15% / 0.08);
+    --shadow-glow: 0 0 30px -8px hsl(32 95% 50% / 0.35);
+    --shadow-card: 0 2px 8px -2px hsl(210 30% 15% / 0.06), 0 4px 16px -4px hsl(210 30% 15% / 0.06);
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 239 84% 67%;
+    --sidebar-background: 210 50% 15%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 32 95% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 96%;
-    --sidebar-accent-foreground: 222 47% 11%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 239 84% 67%;
+    --sidebar-accent: 210 50% 22%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 50% 25%;
+    --sidebar-ring: 32 95% 50%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Primary - Deep Navy Blue */
+    --primary: 210 50% 60%;
+    --primary-foreground: 210 50% 10%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --background: 210 50% 8%;
+    --foreground: 210 15% 95%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --card: 210 50% 12%;
+    --card-foreground: 210 15% 95%;
 
-    --primary: 239 84% 67%;
-    --primary-foreground: 0 0% 100%;
+    --popover: 210 50% 12%;
+    --popover-foreground: 210 15% 95%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 30% 20%;
+    --secondary-foreground: 210 15% 95%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 210 30% 18%;
+    --muted-foreground: 210 15% 60%;
 
-    --accent: 38 92% 50%;
+    --accent: 32 95% 50%;
     --accent-foreground: 0 0% 100%;
 
     --success: 160 84% 39%;
     --success-foreground: 0 0% 100%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 210 15% 95%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 239 84% 67%;
+    --border: 210 30% 20%;
+    --input: 210 30% 20%;
+    --ring: 32 95% 50%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 3%) 0%, hsl(239 84% 15%) 50%, hsl(262 83% 20%) 100%);
-    --gradient-subtle: linear-gradient(135deg, hsl(222 47% 6%) 0%, hsl(222 47% 8%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 47% 7%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(210 50% 5%) 0%, hsl(210 50% 10%) 50%, hsl(210 45% 15%) 100%);
+    --gradient-subtle: linear-gradient(135deg, hsl(210 50% 8%) 0%, hsl(210 50% 10%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(210 50% 12%) 0%, hsl(210 50% 10%) 100%);
 
-    --shadow-glow: 0 0 40px -10px hsl(239 84% 67% / 0.4);
-    --shadow-card: 0 2px 8px -2px hsl(0 0% 0% / 0.3), 0 4px 16px -4px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 30px -8px hsl(32 95% 50% / 0.4);
+    --shadow-card: 0 2px 8px -2px hsl(0 0% 0% / 0.25), 0 4px 16px -4px hsl(0 0% 0% / 0.25);
 
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 239 84% 67%;
+    --sidebar-background: 210 50% 10%;
+    --sidebar-foreground: 210 15% 95%;
+    --sidebar-primary: 32 95% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 239 84% 67%;
+    --sidebar-accent: 210 50% 18%;
+    --sidebar-accent-foreground: 210 15% 95%;
+    --sidebar-border: 210 30% 20%;
+    --sidebar-ring: 32 95% 50%;
   }
 }
 
@@ -143,7 +146,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', system-ui, sans-serif;
-    @apply font-semibold tracking-tight;
+    @apply font-semibold tracking-tight text-foreground;
   }
 }
 
@@ -178,30 +181,40 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background: var(--gradient-primary);
+    background: var(--gradient-accent);
   }
 
   .glass {
-    @apply backdrop-blur-xl bg-white/80 dark:bg-black/40;
+    @apply backdrop-blur-xl bg-card/95;
   }
 
   .role-developer {
-    @apply bg-[hsl(var(--role-developer))] text-white;
+    @apply bg-role-developer text-white;
   }
 
   .role-designer {
-    @apply bg-[hsl(var(--role-designer))] text-white;
+    @apply bg-role-designer text-white;
   }
 
   .role-mentor {
-    @apply bg-[hsl(var(--role-mentor))] text-white;
+    @apply bg-role-mentor text-white;
   }
 
   .role-investor {
-    @apply bg-[hsl(var(--role-investor))] text-white;
+    @apply bg-role-investor text-white;
   }
 
   .role-idea-owner {
-    @apply bg-[hsl(var(--role-idea-owner))] text-white;
+    @apply bg-role-idea-owner text-white;
+  }
+
+  /* Professional button styles */
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 shadow-md hover:shadow-lg transition-all duration-200;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
   }
 }
