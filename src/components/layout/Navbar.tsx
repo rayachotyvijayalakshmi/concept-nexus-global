@@ -134,8 +134,8 @@ export function Navbar() {
                   <DropdownMenuContent align="end" className="w-56">
                     <div className="px-3 py-2">
                       <p className="font-semibold text-foreground">{profile?.full_name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {profile?.email}
+                      <p className="text-sm text-muted-foreground capitalize">
+                        {profile?.role?.replace('_', ' ') || 'Member'}
                       </p>
                     </div>
                     <DropdownMenuSeparator />
@@ -216,8 +216,8 @@ export function Navbar() {
                   </Avatar>
                   <div>
                     <p className="font-medium text-primary-foreground">{profile?.full_name}</p>
-                    <p className="text-sm text-primary-foreground/60">
-                      {profile?.email}
+                    <p className="text-sm text-primary-foreground/60 capitalize">
+                      {profile?.role?.replace('_', ' ') || 'Member'}
                     </p>
                   </div>
                 </div>
