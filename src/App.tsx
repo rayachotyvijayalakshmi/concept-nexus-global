@@ -9,11 +9,13 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Ideas from "./pages/Ideas";
+import IdeaDetail from "./pages/IdeaDetail";
 import NewIdea from "./pages/NewIdea";
 import MyIdeas from "./pages/MyIdeas";
 import Collaborations from "./pages/Collaborations";
 import Requests from "./pages/Requests";
 import Profile from "./pages/Profile";
+import PublicProfile from "./pages/PublicProfile";
 import Messages from "./pages/Messages";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -40,6 +42,22 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Ideas />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ideas/:id"
+              element={
+                <ProtectedRoute>
+                  <IdeaDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/:id"
+              element={
+                <ProtectedRoute>
+                  <PublicProfile />
                 </ProtectedRoute>
               }
             />

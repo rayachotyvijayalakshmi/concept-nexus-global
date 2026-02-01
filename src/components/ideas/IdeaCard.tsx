@@ -81,8 +81,17 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
 
           {/* Footer */}
           <div className="flex items-center justify-between pt-4 border-t border-border">
-            {/* Author */}
-            <div className="flex items-center gap-2">
+            {/* Author - clickable to view profile */}
+            <div
+              className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (idea.owner?.id) {
+                  window.location.href = `/users/${idea.owner.id}`;
+                }
+              }}
+            >
               <Avatar className="w-7 h-7">
                 <AvatarImage src={idea.owner?.avatar_url} />
                 <AvatarFallback className="bg-primary/10 text-primary text-xs">
@@ -92,7 +101,7 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-sm font-medium text-foreground hover:text-accent transition-colors">
                   {idea.owner?.full_name || 'Anonymous'}
                 </span>
                 <span className="text-xs text-muted-foreground flex items-center gap-1">
