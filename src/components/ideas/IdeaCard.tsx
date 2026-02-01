@@ -31,18 +31,21 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
     >
       <Link to={`/ideas/${idea.id}`}>
         <div className="group relative bg-card rounded-xl border border-border p-6 shadow-card hover:shadow-lg transition-all duration-300 hover:border-accent/30 hover:-translate-y-1">
-          {/* Visibility indicator - non-clickable */}
-          <div className="absolute top-4 right-4 pointer-events-none">
+          {/* Visibility indicator - strictly non-clickable, no navigation */}
+          <div 
+            className="absolute top-4 right-4 pointer-events-none select-none"
+            aria-label={`Visibility: ${idea.visibility}`}
+          >
             {idea.visibility === 'public' ? (
-              <div className="flex items-center gap-1 text-success text-xs font-medium bg-success/10 px-2 py-1 rounded-full">
+              <span className="flex items-center gap-1 text-success text-xs font-medium bg-success/10 px-2 py-1 rounded-full">
                 <Eye className="w-3.5 h-3.5" />
                 Public
-              </div>
+              </span>
             ) : (
-              <div className="flex items-center gap-1 text-muted-foreground text-xs font-medium bg-muted px-2 py-1 rounded-full">
+              <span className="flex items-center gap-1 text-muted-foreground text-xs font-medium bg-muted px-2 py-1 rounded-full">
                 <EyeOff className="w-3.5 h-3.5" />
                 Preview
-              </div>
+              </span>
             )}
           </div>
 
@@ -101,8 +104,11 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
               </div>
             </div>
 
-            {/* Upvotes */}
-            <div className="flex items-center gap-1.5 text-muted-foreground">
+            {/* Upvotes - read-only, non-clickable */}
+            <div 
+              className="flex items-center gap-1.5 text-muted-foreground pointer-events-none select-none"
+              aria-label={`${idea.upvotes} upvotes`}
+            >
               <ArrowUp className="w-4 h-4" />
               <span className="text-sm font-medium">{idea.upvotes}</span>
             </div>
