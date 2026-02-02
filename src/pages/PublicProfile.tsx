@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
@@ -10,7 +10,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { RoleBadge } from '@/components/ui/RoleBadge';
 import { CategoryBadge } from '@/components/ui/CategoryBadge';
-import { Profile, Idea, UserRole, roleLabels } from '@/lib/types';
+import { Profile, Idea, UserRole } from '@/lib/types';
+import { useNotifications } from '@/hooks/useNotifications';
 import {
   ArrowLeft,
   MapPin,
@@ -30,10 +31,12 @@ export default function PublicProfile() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { profile: currentUser } = useAuth();
+  const { notifyProfileView } = useNotifications();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(true);
   const [messageLoading, setMessageLoading] = useState(false);
+  const viewNotified = useRef(false);
 
   useEffect(() => {
     if (id) {
@@ -57,6 +60,13 @@ export default function PublicProfile() {
     }
 
     setProfile(data as Profile);
+    
+    // Notify profile owner about the view (only once per page load)
+    if (currentUser && currentUser.id !== id && !viewNotified.current) {
+      viewNotified.current = true;
+      notifyProfileView(id!, currentUser.id);
+    }
+    
     setLoading(false);
   };
 

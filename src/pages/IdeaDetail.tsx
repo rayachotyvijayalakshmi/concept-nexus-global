@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CategoryBadge } from '@/components/ui/CategoryBadge';
 import { RoleBadge } from '@/components/ui/RoleBadge';
 import { Idea, Profile } from '@/lib/types';
+import { useNotifications } from '@/hooks/useNotifications';
 import {
   ArrowLeft,
   ArrowUp,
@@ -32,6 +33,7 @@ export default function IdeaDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { profile: currentUser } = useAuth();
+  const { notifyIdeaView, notifyCollaborationRequest } = useNotifications();
   const [idea, setIdea] = useState<Idea | null>(null);
   const [owner, setOwner] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -39,6 +41,7 @@ export default function IdeaDetail() {
   const [upvoteLoading, setUpvoteLoading] = useState(false);
   const [requestLoading, setRequestLoading] = useState(false);
   const [existingRequest, setExistingRequest] = useState<string | null>(null);
+  const viewNotified = useRef(false);
 
   useEffect(() => {
     if (id) {
@@ -75,6 +78,12 @@ export default function IdeaDetail() {
 
     if (!ownerError && ownerData) {
       setOwner(ownerData as Profile);
+      
+      // Notify owner about the view (only once per page load)
+      if (currentUser && currentUser.id !== ideaData.owner_id && !viewNotified.current) {
+        viewNotified.current = true;
+        notifyIdeaView(ideaData.owner_id, ideaData.id, ideaData.title, currentUser.id);
+      }
     }
 
     setLoading(false);
@@ -171,6 +180,17 @@ export default function IdeaDetail() {
     } else {
       toast.success('Collaboration request sent!');
       setExistingRequest('pending');
+      
+      // Send notification to idea owner
+      if (currentUser && idea) {
+        notifyCollaborationRequest(
+          idea.owner_id,
+          currentUser.full_name,
+          idea.id,
+          idea.title,
+          currentUser.id
+        );
+      }
     }
 
     setRequestLoading(false);

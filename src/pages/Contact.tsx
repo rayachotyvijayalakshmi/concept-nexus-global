@@ -8,7 +8,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import {
   Mail,
-  MessageSquare,
   Send,
   Loader2,
   CheckCircle,
@@ -16,6 +15,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -31,12 +31,27 @@ export default function Contact() {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData,
+      });
 
-    setLoading(false);
-    setSubmitted(true);
-    toast.success('Message sent successfully!');
+      if (error) {
+        throw new Error(error.message || 'Failed to send message');
+      }
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
+
+      setSubmitted(true);
+      toast.success('Message sent successfully!');
+    } catch (error: any) {
+      console.error('Error sending message:', error);
+      toast.error(error.message || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
