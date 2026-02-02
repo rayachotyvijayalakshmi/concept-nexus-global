@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { RoleBadge } from '@/components/ui/RoleBadge';
+import { useNotifications } from '@/hooks/useNotifications';
 import {
   MessageSquare,
   Send,
@@ -33,6 +34,7 @@ interface ConversationWithDetails extends Conversation {
 export default function Messages() {
   const { profile, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const { notifyNewMessage } = useNotifications();
   const [conversations, setConversations] = useState<ConversationWithDetails[]>([]);
   const [selectedConversation, setSelectedConversation] = useState<ConversationWithDetails | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -202,6 +204,16 @@ export default function Messages() {
           updated_at: new Date().toISOString(),
         })
         .eq('id', selectedConversation.id);
+    }
+
+    // Send notification to the other participant
+    if (selectedConversation.other_participant) {
+      notifyNewMessage(
+        selectedConversation.other_participant.id,
+        profile.full_name,
+        selectedConversation.id,
+        profile.id
+      );
     }
 
     setNewMessage('');

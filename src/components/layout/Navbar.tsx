@@ -18,11 +18,12 @@ import {
   LogOut,
   MessageSquare,
   PlusCircle,
-  Bell,
   Flame,
+  Bell,
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { NotificationBell } from '@/components/notifications/NotificationBell';
 
 export function Navbar() {
   const { user, profile, signOut } = useAuth();
@@ -107,6 +108,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             {user ? (
               <>
+                <NotificationBell />
                 <Button
                   variant="ghost"
                   size="icon"

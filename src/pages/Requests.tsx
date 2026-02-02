@@ -10,7 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RoleBadge } from '@/components/ui/RoleBadge';
-import { CollaborationRequest, Profile, Idea, roleLabels } from '@/lib/types';
+import { CollaborationRequest, Profile, Idea } from '@/lib/types';
+import { useNotifications } from '@/hooks/useNotifications';
 import { Inbox, Send, Check, X, Loader2, MessageSquare, Bell } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -21,6 +22,7 @@ interface RequestWithDetails extends CollaborationRequest {
 
 export default function Requests() {
   const { profile } = useAuth();
+  const { notifyCollaborationAccepted, notifyCollaborationRejected } = useNotifications();
   const [incomingRequests, setIncomingRequests] = useState<RequestWithDetails[]>([]);
   const [sentRequests, setSentRequests] = useState<RequestWithDetails[]>([]);
   const [loading, setLoading] = useState(true);
@@ -76,6 +78,9 @@ export default function Requests() {
   const handleUpdateStatus = async (requestId: string, status: 'approved' | 'rejected') => {
     setProcessingId(requestId);
 
+    // Find the request to get details for notification
+    const request = incomingRequests.find(r => r.id === requestId);
+
     const { error } = await supabase
       .from('collaboration_requests')
       .update({ status })
@@ -87,6 +92,26 @@ export default function Requests() {
     } else {
       toast.success(status === 'approved' ? 'Request approved!' : 'Request rejected');
       fetchRequests();
+      
+      // Send notification to requester
+      if (request && profile) {
+        if (status === 'approved') {
+          notifyCollaborationAccepted(
+            request.requester_id,
+            profile.full_name,
+            request.idea_id,
+            request.idea?.title || 'Unknown Idea',
+            profile.id
+          );
+        } else {
+          notifyCollaborationRejected(
+            request.requester_id,
+            request.idea?.title || 'Unknown Idea',
+            profile.id,
+            request.idea_id
+          );
+        }
+      }
     }
 
     setProcessingId(null);
