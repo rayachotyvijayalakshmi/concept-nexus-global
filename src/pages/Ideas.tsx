@@ -80,31 +80,33 @@ export default function Ideas() {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-            <div>
-              <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-                Explore Ideas
-              </h1>
-              <p className="text-muted-foreground">
-                Discover innovative ideas and find your next collaboration
-              </p>
+          <div className="flex flex-col gap-4 mb-8 sm:mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
+                  Explore Ideas
+                </h1>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  Discover innovative ideas and find your next collaboration
+                </p>
+              </div>
+              {user && (
+                <Button
+                  className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold h-12"
+                  onClick={() => navigate('/ideas/new')}
+                >
+                  <PlusCircle className="w-4 h-4 mr-2" />
+                  Share Your Idea
+                </Button>
+              )}
             </div>
-            {user && (
-              <Button
-                className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold"
-                onClick={() => navigate('/ideas/new')}
-              >
-                <PlusCircle className="w-4 h-4 mr-2" />
-                Share Your Idea
-              </Button>
-            )}
           </div>
 
           {/* Filters */}
-          <div className="bg-card rounded-xl border border-border p-4 md:p-6 mb-8 shadow-card">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="bg-card rounded-xl border border-border p-4 mb-6 sm:mb-8 shadow-card">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
               {/* Search */}
-              <div className="lg:col-span-2 relative">
+              <div className="sm:col-span-2 lg:col-span-2 relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search ideas..."
@@ -194,7 +196,7 @@ export default function Ideas() {
               )}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredIdeas.map((idea, index) => (
                 <IdeaCard key={idea.id} idea={idea} index={index} />
               ))}

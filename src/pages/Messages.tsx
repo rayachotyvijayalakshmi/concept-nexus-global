@@ -250,9 +250,9 @@ export default function Messages() {
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
 
-      <main className="flex-1 pt-20">
-        <div className="container mx-auto px-4 py-8">
-          <div className="bg-card rounded-2xl border border-border shadow-card overflow-hidden h-[calc(100vh-200px)] min-h-[600px]">
+      <main className="flex-1 pt-16 sm:pt-20">
+        <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+          <div className="bg-card rounded-xl sm:rounded-2xl border border-border shadow-card overflow-hidden h-[calc(100vh-120px)] sm:h-[calc(100vh-180px)] md:h-[calc(100vh-200px)] min-h-[400px] sm:min-h-[600px]">
             <div className="flex h-full">
               {/* Conversation List */}
               <div
@@ -387,8 +387,8 @@ export default function Messages() {
                         )}
                       </div>
                       {!selectedConversation.is_approved && (
-                        <span className="ml-auto text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">
-                          Limited ({2 - (selectedConversation.intro_messages_count || 0)} messages left)
+                        <span className="ml-auto text-xs bg-accent/20 text-accent px-2 py-1 rounded-full font-medium whitespace-nowrap">
+                          Limited ({2 - (selectedConversation.intro_messages_count || 0)} left)
                         </span>
                       )}
                     </div>
