@@ -146,22 +146,22 @@ export default function Profile() {
             transition={{ duration: 0.5 }}
           >
             <Card className="shadow-card">
-              <CardHeader className="text-center pb-2">
-                <div className="w-14 h-14 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4 shadow-glow">
-                  <User className="w-7 h-7 text-primary-foreground" />
+              <CardHeader className="text-center pb-2 px-4 sm:px-6">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4 shadow-glow">
+                  <User className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
                 </div>
-                <CardTitle className="font-display text-2xl">Your Profile</CardTitle>
-                <CardDescription>
+                <CardTitle className="font-display text-xl sm:text-2xl">Your Profile</CardTitle>
+                <CardDescription className="text-sm">
                   Update your profile information to help others find you
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="pt-6">
+              <CardContent className="pt-6 px-4 sm:px-6">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Avatar */}
-                  <div className="flex flex-col items-center gap-4">
+                  <div className="flex flex-col items-center gap-3 sm:gap-4">
                     <div className="relative group">
-                      <Avatar className="h-24 w-24">
+                      <Avatar className="h-20 w-20 sm:h-24 sm:w-24">
                         <AvatarImage src={avatarUrl} />
                         <AvatarFallback className="bg-primary/10 text-primary text-xl">
                           {fullName ? getInitials(fullName) : 'U'}

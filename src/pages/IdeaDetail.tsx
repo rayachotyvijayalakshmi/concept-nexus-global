@@ -261,7 +261,7 @@ export default function IdeaDetail() {
           >
             <Card className="shadow-card overflow-hidden">
               <CardHeader className="border-b border-border bg-muted/30 pb-6">
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-4">
                       <CategoryBadge category={idea.category} />
@@ -287,7 +287,7 @@ export default function IdeaDetail() {
                         {idea.visibility === 'public' ? 'Public' : 'Preview'}
                       </span>
                     </div>
-                    <h1 className="font-display text-3xl font-bold text-foreground mb-2">
+                    <h1 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
                       {idea.title}
                     </h1>
                     <p className="text-muted-foreground flex items-center gap-2">
@@ -305,7 +305,7 @@ export default function IdeaDetail() {
                     size="lg"
                     onClick={handleUpvote}
                     disabled={upvoteLoading}
-                    className="flex flex-col items-center gap-1 h-auto py-3 px-4"
+                    className="flex flex-row sm:flex-col items-center gap-2 sm:gap-1 h-auto py-2 sm:py-3 px-4 self-start"
                   >
                     {upvoteLoading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -381,7 +381,7 @@ export default function IdeaDetail() {
                 {/* Owner section */}
                 <div className="border-t border-border pt-6">
                   <h2 className="font-display font-semibold text-lg mb-4">Posted by</h2>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <Link
                       to={`/users/${owner?.id}`}
                       className="flex items-center gap-4 hover:opacity-80 transition-opacity"
@@ -410,16 +410,17 @@ export default function IdeaDetail() {
 
                     {/* Action buttons - only show if not the owner */}
                     {!isOwner && currentUser && (
-                      <div className="flex gap-3">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
                         <Button
                           variant="outline"
+                          className="w-full sm:w-auto"
                           onClick={() => navigate('/messages')}
                         >
                           <MessageCircle className="w-4 h-4 mr-2" />
                           Message
                         </Button>
                         {existingRequest ? (
-                          <Button disabled variant="secondary">
+                          <Button disabled variant="secondary" className="w-full sm:w-auto">
                             {existingRequest === 'pending' && 'Request Pending'}
                             {existingRequest === 'approved' && 'Approved'}
                             {existingRequest === 'rejected' && 'Rejected'}
@@ -428,7 +429,7 @@ export default function IdeaDetail() {
                           <Button
                             onClick={handleRequestCollaboration}
                             disabled={requestLoading}
-                            className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                            className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
                           >
                             {requestLoading ? (
                               <Loader2 className="w-4 h-4 mr-2 animate-spin" />

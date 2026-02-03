@@ -30,7 +30,7 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
       transition={{ delay: index * 0.05, duration: 0.4 }}
     >
       <Link to={`/ideas/${idea.id}`}>
-        <div className="group relative bg-card rounded-xl border border-border p-6 shadow-card hover:shadow-lg transition-all duration-300 hover:border-accent/30 hover:-translate-y-1">
+        <div className="group relative bg-card rounded-xl border border-border p-4 sm:p-6 shadow-card hover:shadow-lg transition-all duration-300 hover:border-accent/30 hover:-translate-y-1">
           {/* Visibility indicator - strictly non-clickable, no navigation */}
           <div 
             className="absolute top-4 right-4 pointer-events-none select-none"
@@ -53,7 +53,7 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
           <CategoryBadge category={idea.category} size="sm" className="mb-3" />
 
           {/* Title */}
-          <h3 className="font-display font-semibold text-lg text-foreground mb-2 pr-20 group-hover:text-accent transition-colors line-clamp-2">
+          <h3 className="font-display font-semibold text-base sm:text-lg text-foreground mb-2 pr-16 sm:pr-20 group-hover:text-accent transition-colors line-clamp-2">
             {idea.title}
           </h3>
 

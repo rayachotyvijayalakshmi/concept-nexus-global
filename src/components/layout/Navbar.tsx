@@ -20,6 +20,7 @@ import {
   PlusCircle,
   Flame,
   Bell,
+  Users,
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -204,7 +205,7 @@ export function Navbar() {
           exit={{ opacity: 0, y: -10 }}
           className="md:hidden bg-primary border-t border-primary-foreground/10"
         >
-          <div className="container mx-auto px-4 py-4 space-y-2">
+          <div className="container mx-auto px-4 py-4 space-y-1">
             {user ? (
               <>
                 <div className="flex items-center gap-3 pb-4 mb-2 border-b border-primary-foreground/10">
@@ -216,8 +217,8 @@ export function Navbar() {
                         : 'U'}
                     </AvatarFallback>
                   </Avatar>
-                  <div>
-                    <p className="font-medium text-primary-foreground">{profile?.full_name}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-primary-foreground truncate">{profile?.full_name}</p>
                     <p className="text-sm text-primary-foreground/60 capitalize">
                       {profile?.role?.replace('_', ' ') || 'Member'}
                     </p>
@@ -225,43 +226,57 @@ export function Navbar() {
                 </div>
                 <Link
                   to="/ideas"
-                  className="block py-2.5 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <Lightbulb className="w-5 h-5" />
                   Browse Ideas
                 </Link>
                 <Link
                   to="/ideas/new"
-                  className="block py-2.5 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <PlusCircle className="w-5 h-5" />
                   Share Idea
                 </Link>
                 <Link
                   to="/collaborations"
-                  className="block py-2.5 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <Users className="w-5 h-5" />
                   Find Collaborators
                 </Link>
                 <Link
                   to="/messages"
-                  className="block py-2.5 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <MessageSquare className="w-5 h-5" />
                   Messages
                 </Link>
                 <Link
-                  to="/profile"
-                  className="block py-2.5 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10"
+                  to="/requests"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <Bell className="w-5 h-5" />
+                  Requests
+                </Link>
+                <Link
+                  to="/profile"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="w-5 h-5" />
                   Profile
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="block py-2.5 px-3 rounded-lg text-destructive font-medium w-full text-left hover:bg-primary-foreground/10"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-destructive font-medium w-full text-left hover:bg-destructive/10 active:bg-destructive/15 transition-colors mt-2"
                 >
+                  <LogOut className="w-5 h-5" />
                   Sign Out
                 </button>
               </>
@@ -269,15 +284,15 @@ export function Navbar() {
               <>
                 <Link
                   to="/ideas"
-                  className="block py-2.5 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10"
+                  className="flex items-center gap-3 py-3 px-3 rounded-lg text-primary-foreground font-medium hover:bg-primary-foreground/10 active:bg-primary-foreground/15 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <Lightbulb className="w-5 h-5" />
                   Browse Ideas
                 </Link>
-                <div className="flex gap-3 pt-4 border-t border-primary-foreground/10">
+                <div className="flex flex-col gap-3 pt-4 mt-2 border-t border-primary-foreground/10">
                   <Button
-                    variant="outline"
-                    className="flex-1 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                    className="w-full h-12 bg-primary-foreground/20 backdrop-blur-sm border-2 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/30 hover:border-primary-foreground/70 font-semibold"
                     onClick={() => {
                       navigate('/login');
                       setMobileMenuOpen(false);
@@ -286,7 +301,7 @@ export function Navbar() {
                     Sign In
                   </Button>
                   <Button
-                    className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
+                    className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
                     onClick={() => {
                       navigate('/signup');
                       setMobileMenuOpen(false);

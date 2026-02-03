@@ -94,14 +94,14 @@ export default function Landing() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 gradient-hero opacity-95" />
         
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        {/* Decorative elements - hidden on small screens for performance */}
+        <div className="absolute inset-0 overflow-hidden hidden sm:block">
+          <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-1/4 right-1/4 w-48 md:w-80 h-48 md:h-80 bg-accent/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
         </div>
 
         <div className="container relative mx-auto px-4">
@@ -116,31 +116,30 @@ export default function Landing() {
                 The platform for idea collaboration
               </span>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 leading-tight">
                 Where Ideas Meet{' '}
                 <span className="text-accent">
                   The Right People
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-primary-foreground/80 mb-8 md:mb-10 max-w-xl leading-relaxed">
                 Connect with developers, designers, mentors, and investors. 
                 Build trusted relationships and transform your vision into reality.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-start gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl px-8 h-14 text-base font-semibold"
+                  className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl px-8 h-14 text-base font-semibold min-h-[56px]"
                   onClick={() => navigate('/ideas')}
                 >
-                  Browse Ideas
+                  Explore Ideas
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm px-8 h-14 text-base font-semibold"
+                  className="w-full sm:w-auto bg-primary-foreground/20 backdrop-blur-sm border-2 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/30 hover:border-primary-foreground/70 px-8 h-14 text-base font-semibold min-h-[56px]"
                   onClick={() => navigate('/signup')}
                 >
                   Share Your Idea
@@ -148,13 +147,13 @@ export default function Landing() {
               </div>
 
               {/* Stats */}
-              <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="mt-10 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {stats.map((stat, index) => (
-                  <div key={index} className="text-left">
-                    <div className="text-2xl md:text-3xl font-display font-bold text-accent mb-1">
+                  <div key={index} className="text-center sm:text-left">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-accent mb-1">
                       {stat.value}
                     </div>
-                    <div className="text-primary-foreground/60 text-sm">{stat.label}</div>
+                    <div className="text-primary-foreground/60 text-xs sm:text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -164,12 +163,12 @@ export default function Landing() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden lg:block"
+              className="hidden lg:flex items-center justify-center"
             >
               <img
                 src={heroIllustration}
                 alt="IdeaForge - Connect ideas with the right people"
-                className="w-full rounded-2xl shadow-2xl"
+                className="w-full max-w-lg xl:max-w-xl rounded-2xl shadow-2xl object-contain"
               />
             </motion.div>
           </div>
@@ -194,7 +193,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -238,7 +237,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
             {roles.map((item, index) => (
               <motion.div
                 key={index}
@@ -271,24 +270,24 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative overflow-hidden rounded-3xl gradient-hero p-12 md:p-20 text-center"
+            className="relative overflow-hidden rounded-2xl md:rounded-3xl gradient-hero p-8 sm:p-12 md:p-20 text-center"
           >
-            {/* Decorative */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-foreground/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
+            {/* Decorative - hidden on mobile for performance */}
+            <div className="absolute top-0 right-0 w-32 md:w-64 h-32 md:h-64 bg-primary-foreground/5 rounded-full blur-3xl hidden sm:block" />
+            <div className="absolute bottom-0 left-0 w-24 md:w-48 h-24 md:h-48 bg-accent/10 rounded-full blur-3xl hidden sm:block" />
 
             <div className="relative">
-              <h2 className="font-display text-3xl md:text-5xl font-bold text-primary-foreground mb-6">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-bold text-primary-foreground mb-4 md:mb-6">
                 Ready to Forge Your Next Big Idea?
               </h2>
-              <p className="text-primary-foreground/80 text-lg mb-10 max-w-xl mx-auto">
+              <p className="text-primary-foreground/80 text-base sm:text-lg mb-8 md:mb-10 max-w-xl mx-auto">
                 Join a global community of innovators, builders, and investors. 
                 Your next breakthrough starts here.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
                 <Button
                   size="lg"
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl px-8 h-14 text-base font-semibold"
+                  className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl px-8 h-14 text-base font-semibold min-h-[56px]"
                   onClick={() => navigate('/signup')}
                 >
                   Get Started Free
@@ -296,8 +295,7 @@ export default function Landing() {
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 h-14 text-base font-semibold"
+                  className="w-full sm:w-auto bg-primary-foreground/20 backdrop-blur-sm border-2 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/30 hover:border-primary-foreground/70 px-8 h-14 text-base font-semibold min-h-[56px]"
                   onClick={() => navigate('/ideas')}
                 >
                   Explore Ideas

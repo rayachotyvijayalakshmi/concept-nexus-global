@@ -140,22 +140,22 @@ export default function Collaborations() {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="mb-10">
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
+          <div className="mb-8 sm:mb-10">
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
               Find Collaborators
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-sm sm:text-base">
               Discover ideas looking for talent like you and request to collaborate
             </p>
           </div>
 
           {/* Filters */}
-          <div className="bg-card rounded-xl border border-border p-4 md:p-6 mb-8 shadow-card">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="bg-card rounded-xl border border-border p-4 mb-6 sm:mb-8 shadow-card">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <Filter className="w-4 h-4 text-muted-foreground" />
               <span className="font-medium text-sm">Filters</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -217,7 +217,7 @@ export default function Collaborations() {
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredIdeas.map((idea, index) => (
                 <motion.div
                   key={idea.id}
