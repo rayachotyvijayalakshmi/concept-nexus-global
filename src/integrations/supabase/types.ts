@@ -703,6 +703,18 @@ export type Database = {
       }
     }
     Functions: {
+      create_notification: {
+        Args: {
+          p_actor_id?: string
+          p_idea_id?: string
+          p_link?: string
+          p_message: string
+          p_title: string
+          p_type: string
+          p_user_id: string
+        }
+        Returns: string
+      }
       get_current_profile_id: { Args: never; Returns: string }
     }
     Enums: {

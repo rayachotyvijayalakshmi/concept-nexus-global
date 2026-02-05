@@ -59,9 +59,9 @@ export default function IdeaDetail() {
       .from('ideas')
       .select('*')
       .eq('id', id)
-      .single();
+      .maybeSingle();
 
-    if (ideaError) {
+    if (ideaError || !ideaData) {
       console.error('Error fetching idea:', ideaError);
       setLoading(false);
       return;
@@ -69,12 +69,12 @@ export default function IdeaDetail() {
 
     setIdea(ideaData as Idea);
 
-    // Fetch owner profile
+    // Fetch owner profile - use profiles_public to avoid exposing email
     const { data: ownerData, error: ownerError } = await supabase
-      .from('profiles')
+      .from('profiles_public')
       .select('*')
       .eq('id', ideaData.owner_id)
-      .single();
+      .maybeSingle();
 
     if (!ownerError && ownerData) {
       setOwner(ownerData as Profile);
@@ -96,7 +96,7 @@ export default function IdeaDetail() {
       .select('id')
       .eq('idea_id', id)
       .eq('user_id', currentUser.id)
-      .single();
+      .maybeSingle();
 
     setHasUpvoted(!!data);
   };
@@ -108,7 +108,7 @@ export default function IdeaDetail() {
       .select('status')
       .eq('idea_id', id)
       .eq('requester_id', currentUser.id)
-      .single();
+      .maybeSingle();
 
     setExistingRequest(data?.status || null);
   };
@@ -116,6 +116,7 @@ export default function IdeaDetail() {
   const handleUpvote = async () => {
     if (!currentUser) {
       toast.error('Please log in to upvote');
+      navigate('/login');
       return;
     }
 
@@ -409,34 +410,46 @@ export default function IdeaDetail() {
                     </Link>
 
                     {/* Action buttons - only show if not the owner */}
-                    {!isOwner && currentUser && (
+                    {!isOwner && (
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-                        <Button
-                          variant="outline"
-                          className="w-full sm:w-auto"
-                          onClick={() => navigate('/messages')}
-                        >
-                          <MessageCircle className="w-4 h-4 mr-2" />
-                          Message
-                        </Button>
-                        {existingRequest ? (
-                          <Button disabled variant="secondary" className="w-full sm:w-auto">
-                            {existingRequest === 'pending' && 'Request Pending'}
-                            {existingRequest === 'approved' && 'Approved'}
-                            {existingRequest === 'rejected' && 'Rejected'}
-                          </Button>
+                        {currentUser ? (
+                          <>
+                            <Button
+                              variant="outline"
+                              className="w-full sm:w-auto"
+                              onClick={() => navigate('/messages')}
+                            >
+                              <MessageCircle className="w-4 h-4 mr-2" />
+                              Message
+                            </Button>
+                            {existingRequest ? (
+                              <Button disabled variant="secondary" className="w-full sm:w-auto">
+                                {existingRequest === 'pending' && 'Request Pending'}
+                                {existingRequest === 'approved' && 'Approved'}
+                                {existingRequest === 'rejected' && 'Rejected'}
+                              </Button>
+                            ) : (
+                              <Button
+                                onClick={handleRequestCollaboration}
+                                disabled={requestLoading}
+                                className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
+                              >
+                                {requestLoading ? (
+                                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                ) : (
+                                  <Users className="w-4 h-4 mr-2" />
+                                )}
+                                Request Collaboration
+                              </Button>
+                            )}
+                          </>
                         ) : (
                           <Button
-                            onClick={handleRequestCollaboration}
-                            disabled={requestLoading}
+                            onClick={() => navigate('/login')}
                             className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
                           >
-                            {requestLoading ? (
-                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            ) : (
-                              <Users className="w-4 h-4 mr-2" />
-                            )}
-                            Request Collaboration
+                            <Users className="w-4 h-4 mr-2" />
+                            Log in to Collaborate
                           </Button>
                         )}
                       </div>

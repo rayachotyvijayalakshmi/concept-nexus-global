@@ -35,11 +35,19 @@ export default function Ideas() {
   const fetchIdeas = async () => {
     setLoading(true);
 
+    // Use profiles_public view which is accessible without authentication
     let query = supabase
       .from('ideas')
       .select(`
         *,
-        owner:profiles!ideas_owner_id_fkey(*)
+        owner:profiles_public!ideas_owner_id_fkey(
+          id,
+          full_name,
+          avatar_url,
+          headline,
+          role,
+          location
+        )
       `)
       .eq('visibility', 'public'); // Only fetch public ideas
 
@@ -90,13 +98,21 @@ export default function Ideas() {
                   Discover innovative ideas and find your next collaboration
                 </p>
               </div>
-              {user && (
+              {user ? (
                 <Button
                   className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold h-12"
                   onClick={() => navigate('/ideas/new')}
                 >
                   <PlusCircle className="w-4 h-4 mr-2" />
                   Share Your Idea
+                </Button>
+              ) : (
+                <Button
+                  className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow font-semibold h-12"
+                  onClick={() => navigate('/login')}
+                >
+                  <PlusCircle className="w-4 h-4 mr-2" />
+                  Log in to Share
                 </Button>
               )}
             </div>
@@ -185,13 +201,21 @@ export default function Ideas() {
                   ? 'Try adjusting your search or filters'
                   : 'Be the first to share an idea!'}
               </p>
-              {user && (
+              {user ? (
                 <Button
                   className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow"
                   onClick={() => navigate('/ideas/new')}
                 >
                   <PlusCircle className="w-4 h-4 mr-2" />
                   Share Your Idea
+                </Button>
+              ) : (
+                <Button
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-glow"
+                  onClick={() => navigate('/signup')}
+                >
+                  <PlusCircle className="w-4 h-4 mr-2" />
+                  Sign up to Share
                 </Button>
               )}
             </div>
