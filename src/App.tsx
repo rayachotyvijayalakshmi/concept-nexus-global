@@ -37,35 +37,16 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route
-              path="/ideas"
-              element={
-                <ProtectedRoute>
-                  <Ideas />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/ideas/:id"
-              element={
-                <ProtectedRoute>
-                  <IdeaDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/users/:id"
-              element={
-                <ProtectedRoute>
-                  <PublicProfile />
-                </ProtectedRoute>
-              }
-            />
+            {/* Public routes - accessible without login */}
+            <Route path="/ideas" element={<Ideas />} />
+            <Route path="/ideas/:id" element={<IdeaDetail />} />
+            <Route path="/users/:id" element={<PublicProfile />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
+            {/* Protected routes - require login */}
             <Route
               path="/ideas/new"
               element={

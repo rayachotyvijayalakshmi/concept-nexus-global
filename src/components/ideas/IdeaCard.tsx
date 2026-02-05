@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUp, Eye, EyeOff, Clock, User } from 'lucide-react';
+import { ArrowUp, Eye, EyeOff, Clock } from 'lucide-react';
 import { Idea } from '@/lib/types';
 import { CategoryBadge } from '@/components/ui/CategoryBadge';
 import { RoleBadge } from '@/components/ui/RoleBadge';
@@ -14,6 +15,8 @@ interface IdeaCardProps {
 }
 
 export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
+  const navigate = useNavigate();
+  
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -21,6 +24,14 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
       .join('')
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const handleAuthorClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (idea.owner?.id) {
+      navigate(`/users/${idea.owner.id}`);
+    }
   };
 
   return (
@@ -31,18 +42,25 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
     >
       <Link to={`/ideas/${idea.id}`}>
         <div className="group relative bg-card rounded-xl border border-border p-4 sm:p-6 shadow-card hover:shadow-lg transition-all duration-300 hover:border-accent/30 hover:-translate-y-1">
-          {/* Visibility indicator - strictly non-clickable, no navigation */}
-          <div 
-            className="absolute top-4 right-4 pointer-events-none select-none"
-            aria-label={`Visibility: ${idea.visibility}`}
-          >
+          {/* Visibility indicator - strictly non-interactive display element */}
+          <div className="absolute top-4 right-4">
             {idea.visibility === 'public' ? (
-              <span className="flex items-center gap-1 text-success text-xs font-medium bg-success/10 px-2 py-1 rounded-full">
+              <span 
+                className="flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full pointer-events-none select-none cursor-default"
+                style={{ 
+                  backgroundColor: 'hsl(var(--success) / 0.1)', 
+                  color: 'hsl(var(--success))' 
+                }}
+                aria-label="This idea is public"
+              >
                 <Eye className="w-3.5 h-3.5" />
                 Public
               </span>
             ) : (
-              <span className="flex items-center gap-1 text-muted-foreground text-xs font-medium bg-muted px-2 py-1 rounded-full">
+              <span 
+                className="flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full pointer-events-none select-none cursor-default bg-muted text-muted-foreground"
+                aria-label="This idea is in preview mode"
+              >
                 <EyeOff className="w-3.5 h-3.5" />
                 Preview
               </span>
@@ -81,16 +99,11 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
 
           {/* Footer */}
           <div className="flex items-center justify-between pt-4 border-t border-border">
-            {/* Author - clickable to view profile */}
-            <div
-              className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (idea.owner?.id) {
-                  window.location.href = `/users/${idea.owner.id}`;
-                }
-              }}
+            {/* Author - clickable to view profile using navigate */}
+            <button
+              type="button"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity text-left"
+              onClick={handleAuthorClick}
             >
               <Avatar className="w-7 h-7">
                 <AvatarImage src={idea.owner?.avatar_url} />
@@ -111,16 +124,16 @@ export function IdeaCard({ idea, index = 0 }: IdeaCardProps) {
                   })}
                 </span>
               </div>
-            </div>
+            </button>
 
-            {/* Upvotes - read-only, non-clickable */}
-            <div 
-              className="flex items-center gap-1.5 text-muted-foreground pointer-events-none select-none"
+            {/* Upvotes - strictly non-interactive display element */}
+            <span 
+              className="flex items-center gap-1.5 text-muted-foreground pointer-events-none select-none cursor-default"
               aria-label={`${idea.upvotes} upvotes`}
             >
               <ArrowUp className="w-4 h-4" />
               <span className="text-sm font-medium">{idea.upvotes}</span>
-            </div>
+            </span>
           </div>
         </div>
       </Link>

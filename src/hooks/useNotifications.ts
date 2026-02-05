@@ -1,40 +1,31 @@
 import { supabase } from '@/integrations/supabase/client';
 
-interface CreateNotificationParams {
-  userId: string;
-  type: 'idea_view' | 'profile_view' | 'collaboration_request' | 'collaboration_accepted' | 'collaboration_rejected' | 'new_message';
-  title: string;
-  message: string;
-  link?: string;
-  actorId?: string;
-  ideaId?: string;
-}
-
-export async function createNotification({
-  userId,
-  type,
-  title,
-  message,
-  link,
-  actorId,
-  ideaId,
-}: CreateNotificationParams) {
+// Secure notification creation using RPC function
+// This ensures only authenticated users can create notifications
+async function createNotification(
+  userId: string,
+  type: string,
+  title: string,
+  message: string,
+  link?: string,
+  actorId?: string,
+  ideaId?: string
+) {
   // Don't notify yourself
   if (actorId && actorId === userId) {
     return { data: null, error: null };
   }
 
-  const { data, error } = await supabase
-    .from('notifications')
-    .insert({
-      user_id: userId,
-      type,
-      title,
-      message,
-      link: link || null,
-      actor_id: actorId || null,
-      idea_id: ideaId || null,
-    });
+  // Use the secure RPC function instead of direct insert
+  const { data, error } = await supabase.rpc('create_notification', {
+    p_user_id: userId,
+    p_type: type,
+    p_title: title,
+    p_message: message,
+    p_link: link || null,
+    p_idea_id: ideaId || null,
+    p_actor_id: actorId || null,
+  });
 
   if (error) {
     console.error('Error creating notification:', error);
@@ -50,29 +41,29 @@ export function useNotifications() {
     ideaTitle: string,
     viewerId?: string
   ) => {
-    return createNotification({
-      userId: ideaOwnerId,
-      type: 'idea_view',
-      title: 'Someone viewed your idea',
-      message: `Your idea "${ideaTitle}" was viewed`,
-      link: `/ideas/${ideaId}`,
-      actorId: viewerId,
-      ideaId,
-    });
+    return createNotification(
+      ideaOwnerId,
+      'idea_view',
+      'Someone viewed your idea',
+      `Your idea "${ideaTitle}" was viewed`,
+      `/ideas/${ideaId}`,
+      viewerId,
+      ideaId
+    );
   };
 
   const notifyProfileView = async (
     profileOwnerId: string,
     viewerId?: string
   ) => {
-    return createNotification({
-      userId: profileOwnerId,
-      type: 'profile_view',
-      title: 'Someone viewed your profile',
-      message: 'A user viewed your profile',
-      link: '/profile',
-      actorId: viewerId,
-    });
+    return createNotification(
+      profileOwnerId,
+      'profile_view',
+      'Someone viewed your profile',
+      'A user viewed your profile',
+      '/profile',
+      viewerId
+    );
   };
 
   const notifyCollaborationRequest = async (
@@ -82,15 +73,15 @@ export function useNotifications() {
     ideaTitle: string,
     requesterId: string
   ) => {
-    return createNotification({
-      userId: ideaOwnerId,
-      type: 'collaboration_request',
-      title: 'New collaboration request',
-      message: `${requesterName} wants to collaborate on "${ideaTitle}"`,
-      link: '/requests',
-      actorId: requesterId,
-      ideaId,
-    });
+    return createNotification(
+      ideaOwnerId,
+      'collaboration_request',
+      'New collaboration request',
+      `${requesterName} wants to collaborate on "${ideaTitle}"`,
+      '/requests',
+      requesterId,
+      ideaId
+    );
   };
 
   const notifyCollaborationAccepted = async (
@@ -100,15 +91,15 @@ export function useNotifications() {
     ideaTitle: string,
     ownerId: string
   ) => {
-    return createNotification({
-      userId: requesterId,
-      type: 'collaboration_accepted',
-      title: 'Collaboration request accepted!',
-      message: `${ownerName} accepted your request to collaborate on "${ideaTitle}"`,
-      link: `/ideas/${ideaId}`,
-      actorId: ownerId,
-      ideaId,
-    });
+    return createNotification(
+      requesterId,
+      'collaboration_accepted',
+      'Collaboration request accepted!',
+      `${ownerName} accepted your request to collaborate on "${ideaTitle}"`,
+      `/ideas/${ideaId}`,
+      ownerId,
+      ideaId
+    );
   };
 
   const notifyCollaborationRejected = async (
@@ -117,15 +108,15 @@ export function useNotifications() {
     ownerId: string,
     ideaId: string
   ) => {
-    return createNotification({
-      userId: requesterId,
-      type: 'collaboration_rejected',
-      title: 'Collaboration request declined',
-      message: `Your request to collaborate on "${ideaTitle}" was declined`,
-      link: `/ideas/${ideaId}`,
-      actorId: ownerId,
-      ideaId,
-    });
+    return createNotification(
+      requesterId,
+      'collaboration_rejected',
+      'Collaboration request declined',
+      `Your request to collaborate on "${ideaTitle}" was declined`,
+      `/ideas/${ideaId}`,
+      ownerId,
+      ideaId
+    );
   };
 
   const notifyNewMessage = async (
@@ -134,14 +125,14 @@ export function useNotifications() {
     conversationId: string,
     senderId: string
   ) => {
-    return createNotification({
-      userId: recipientId,
-      type: 'new_message',
-      title: 'New message',
-      message: `${senderName} sent you a message`,
-      link: '/messages',
-      actorId: senderId,
-    });
+    return createNotification(
+      recipientId,
+      'new_message',
+      'New message',
+      `${senderName} sent you a message`,
+      '/messages',
+      senderId
+    );
   };
 
   return {

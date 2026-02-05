@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { RoleBadge } from '@/components/ui/RoleBadge';
 import { CategoryBadge } from '@/components/ui/CategoryBadge';
-import { Profile, Idea, UserRole } from '@/lib/types';
+import { Idea, UserRole } from '@/lib/types';
 import { useNotifications } from '@/hooks/useNotifications';
 import {
   ArrowLeft,
@@ -27,12 +27,31 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+// Public profile type - excludes sensitive data like email
+interface PublicProfile {
+  id: string;
+  user_id: string;
+  full_name: string;
+  role: UserRole;
+  headline?: string;
+  about?: string;
+  avatar_url?: string;
+  location?: string;
+  skills: string[];
+  linkedin_url?: string;
+  github_url?: string;
+  behance_url?: string;
+  portfolio_url?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export default function PublicProfile() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { profile: currentUser } = useAuth();
   const { notifyProfileView } = useNotifications();
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profile, setProfile] = useState<PublicProfile | null>(null);
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(true);
   const [messageLoading, setMessageLoading] = useState(false);
@@ -47,19 +66,20 @@ export default function PublicProfile() {
 
   const fetchProfile = async () => {
     setLoading(true);
+    // Use profiles_public view which excludes sensitive data like email
     const { data, error } = await supabase
-      .from('profiles')
+      .from('profiles_public')
       .select('*')
       .eq('id', id)
-      .single();
+      .maybeSingle();
 
-    if (error) {
+    if (error || !data) {
       console.error('Error fetching profile:', error);
       setLoading(false);
       return;
     }
 
-    setProfile(data as Profile);
+    setProfile(data as PublicProfile);
     
     // Notify profile owner about the view (only once per page load)
     if (currentUser && currentUser.id !== id && !viewNotified.current) {
@@ -217,24 +237,34 @@ export default function PublicProfile() {
                   </div>
 
                   {/* Action buttons */}
-                  {!isOwnProfile && currentUser && (
-                    <div className="flex gap-3">
-                      <Button
-                        variant="outline"
-                        onClick={handleStartConversation}
-                        disabled={messageLoading}
-                      >
-                        {messageLoading ? (
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        ) : (
+                  {!isOwnProfile && (
+                    <div className="flex gap-3 flex-wrap">
+                      {currentUser ? (
+                        <Button
+                          variant="outline"
+                          onClick={handleStartConversation}
+                          disabled={messageLoading}
+                        >
+                          {messageLoading ? (
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          ) : (
+                            <MessageCircle className="w-4 h-4 mr-2" />
+                          )}
+                          Message
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => navigate('/login')}
+                          className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                        >
                           <MessageCircle className="w-4 h-4 mr-2" />
-                        )}
-                        Message
-                      </Button>
+                          Log in to Connect
+                        </Button>
+                      )}
                     </div>
                   )}
 
-                  {isOwnProfile && (
+                  {isOwnProfile && currentUser && (
                     <Button onClick={() => navigate('/profile')}>Edit Profile</Button>
                   )}
                 </div>
